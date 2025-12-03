@@ -1,11 +1,300 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primeira página</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salão Beleza & Estilo</title>
+
+  <!-- Fonte opcional do Google (pode remover se quiser) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+  <script src="scripts.js" defer></script>
 </head>
 <body>
-    <h1>LEO</h1>
+  <header class="header">
+    <div class="container header__container">
+      <a href="#topo" class="logo">Barbearia Sport Hair</a>
+
+      <button class="nav-toggle" aria-label="Abrir menu de navegação">
+        <span class="nav-toggle__line"></span>
+        <span class="nav-toggle__line"></span>
+        <span class="nav-toggle__line"></span>
+      </button>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="#inicio" class="nav__link">Início</a></li>
+          <li><a href="#servicos" class="nav__link">Serviços</a></li>
+          <li><a href="#agendamento" class="nav__link">Agendamento</a></li>
+          <li><a href="#contato" class="nav__link">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="topo">
+    <!-- INÍCIO / HERO -->
+    <section id="inicio" class="section section--hero">
+      <div class="container hero__container">
+        <div class="hero__content">
+          <p class="hero__tagline">Seu novo visual começa aqui</p>
+          <h1 class="hero__title">
+            Salão de beleza moderno, pensado para você.
+          </h1>
+          <p class="hero__subtitle" data-saudar>
+            <!-- Será preenchido via JS (sem innerHTML) -->
+          </p>
+          <div class="hero__actions">
+            <a href="#agendamento" class="btn btn--primary">
+              Agendar horário
+            </a>
+            <a href="#servicos" class="btn btn--outline">
+              Ver serviços
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__highlight">
+  <div class="hero__logo-wrapper">
+    <img 
+      src="https://1drv.ms/i/c/e98c99b2210be03a/IQRmUof11bICTIbssHjRAU_CAeedCL0Pt2a64oMcDexWmb4?width=256&height=999999"
+      alt="Logo da empresa"
+      class="hero__logo"
+    />
+  </div>
+</div>
+
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="section">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title">Serviços</h2>
+          <p class="section__subtitle">
+            Escolha o serviço ideal para o seu momento.
+          </p>
+        </header>
+
+        <div class="grid grid--3cols">
+          <article class="card-servico">
+            <h3 class="card-servico__title">Corte de Cabelo</h3>
+            <p class="card-servico__desc">
+              Cortes modernos e clássicos alinhados ao seu estilo.
+            </p>
+            <p class="card-servico__price">R$ 60,00</p>
+          </article>
+
+          <article class="card-servico">
+            <h3 class="card-servico__title">Barba</h3>
+            <p class="card-servico__desc">
+              Barbaterapia com toalha quente e creme hidratante.
+            </p>
+            <p class="card-servico__price">R$ 35,00</p>
+          </article>
+
+          <article class="card-servico">
+            <h3 class="card-servico__title">Corte e Barba</h3>
+            <p class="card-servico__desc">
+              Cuidado para pele e cabelo.
+            </p>
+            <p class="card-servico__price">R$ 80,00</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDAMENTO -->
+    <section id="agendamento" class="section section--accent">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title">Agendamento</h2>
+          <p class="section__subtitle">
+            Preencha os dados para reservar seu horário.
+          </p>
+        </header>
+
+        <form class="form" id="form-agendamento" novalidate>
+          <div class="form__grid">
+            <div class="form__field">
+              <label for="nome" class="form__label">Nome completo</label>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                class="form__input"
+                required
+              />
+              <span class="form__error" data-error-for="nome"></span>
+            </div>
+
+            <div class="form__field">
+              <label for="telefone" class="form__label">Telefone</label>
+              <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                class="form__input"
+                required
+              />
+              <span class="form__error" data-error-for="telefone"></span>
+            </div>
+
+             <!-- VERIFICAÇÃO DO CEP VIA API -->
+  <div class="form__field">
+    <label for="cep" class="form__label">CEP</label>
+    <input
+      type="text"
+      id="cep"
+      name="cep"
+      class="form__input"
+      inputmode="numeric"
+      maxlength="9"
+      placeholder="00000-000"
+      required
+    />
+    <span class="form__error" data-error-for="cep"></span>
+  </div>
+
+  <!-- Cidade (preenchido via API) -->
+  <div class="form__field">
+    <label for="cidade" class="form__label">Cidade</label>
+    <input
+      type="text"
+      id="cidade"
+      name="cidade"
+      class="form__input"
+      readonly
+    />
+    <span class="form__error" data-error-for="cidade"></span>
+  </div>
+
+  <!-- Estado (preenchido via API) -->
+  <div class="form__field">
+    <label for="estado" class="form__label">Estado</label>
+    <input
+      type="text"
+      id="estado"
+      name="estado"
+      class="form__input"
+      readonly
+    />
+    <span class="form__error" data-error-for="estado"></span>
+  </div>
+
+            <div class="form__field">
+              <label for="servico" class="form__label">Serviço</label>
+              <select
+                id="servico"
+                name="servico"
+                class="form__input"
+                required
+              >
+                <option value="">Selecione um serviço</option>
+                <option value="corte">Corte de Cabelo</option>
+                <option value="coloracao">Coloração</option>
+                <option value="manicure">Manicure &amp; Pedicure</option>
+              </select>
+              <span class="form__error" data-error-for="servico"></span>
+            </div>
+
+            <div class="form__field">
+              <label for="data" class="form__label">Data</label>
+              <input
+                type="date"
+                id="data"
+                name="data"
+                class="form__input"
+                required
+              />
+              <span class="form__error" data-error-for="data"></span>
+            </div>
+
+            <div class="form__field">
+              <label for="hora" class="form__label">Horário</label>
+              <input
+                type="time"
+                id="hora"
+                name="hora"
+                class="form__input"
+                required
+              />
+              <span class="form__error" data-error-for="hora"></span>
+            </div>
+
+            <div class="form__field form__field--full">
+              <label for="observacoes" class="form__label">Observações</label>
+              <textarea
+                id="observacoes"
+                name="observacoes"
+                class="form__input form__textarea"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn--primary">
+            Enviar agendamento
+          </button>
+
+          <p class="form__feedback" id="form-feedback" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="section">
+      <div class="container contato__container">
+        <div class="contato__info">
+          <header class="section__header section__header--left">
+            <h2 class="section__title">Contato</h2>
+            <p class="section__subtitle">
+              Ficou com dúvida? Fale com a nossa equipe.
+            </p>
+          </header>
+
+          <ul class="contato__list">
+            <li><strong>Endereço:</strong> Rua Exemplo, 123 – Santa Amélia, BH/MG</li>
+            <li><strong>Telefone:</strong> (31) 99312-0515</li>
+            <li><strong>Horário:</strong> Seg a Sáb, 9h às 19h</li>
+          </ul>
+
+          <a
+            href="https://wa.me/5531993120515"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--whatsapp"
+          >
+            Falar no WhatsApp
+          </a>
+        </div>
+
+        <div class="contato__mapa">
+          <!-- Você pode trocar por um iframe de Google Maps depois -->
+          <div class="mapa-placeholder">
+            <p>Mapa do salão (Google Maps embed)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__container">
+      <p class="footer__text">
+        <span id="ano-atual"></span> &copy; Barbearia Sport Hair. Todos os
+        direitos reservados.
+      </p>
+    </div>
+  </footer>
+
+  
 </body>
 </html>
