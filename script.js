@@ -107,76 +107,78 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* =========================================
-   * VIA CEP (CEP → Cidade / Estado)
-   * ======================================= */
-  const cepInput = document.getElementById("cep");
-  const cidadeInput = document.getElementById("cidade");
-  const estadoInput = document.getElementById("estado");
+/* =========================================
+ * VIA CEP (CEP → Cidade / Estado)
+ * ======================================= */
+const cepInput = document.getElementById("cep");
+const cidadeInput = document.getElementById("cidade");
+const estadoInput = document.getElementById("estado");
 
-  function limparEndereco() {
-    if (cidadeInput) cidadeInput.value = "";
-    if (estadoInput) estadoInput.value = "";
+function limparEndereco() {
+  if (cidadeInput) cidadeInput.value = "";
+  if (estadoInput) estadoInput.value = "";
+}
+
+function preencherEndereco(dados) {
+  if (cidadeInput && typeof dados.localidade === "string") {
+    cidadeInput.value = dados.localidade;
   }
-
-  function preencherEndereco(dados) {
-    if (cidadeInput && typeof dados.localidade === "string") {
-      cidadeInput.value = dados.localidade;
-    }
-    if (estadoInput && typeof dados.uf === "string") {
-      estadoInput.value = dados.uf;
-    }
+  if (estadoInput && typeof dados.uf === "string") {
+    estadoInput.value = dados.uf;
   }
+}
 
-  async function buscarCep(cepLimpo) {
-    try {
-      const url = "https://viacep.com.br/ws/" + cepLimpo + "/json/";
-      const resposta = await fetch(url);
+async function buscarCep(cepLimpo) {
+  try {
+    const url = "https://viacep.com.br/ws/" + cepLimpo + "/json/";
+    const resposta = await fetch(url);
 
-      if (!resposta.ok) {
-        throw new Error("Erro ao consultar o CEP");
-      }
+    if (!resposta.ok) throw new Error("Erro na consulta");
 
-      const dados = await resposta.json();
+    const dados = await resposta.json();
 
-      if (dados.erro) {
-        limparEndereco();
-        exibirErro("cep", "CEP não encontrado.");
-        return;
-      }
-
-      exibirErro("cep", "");
-      preencherEndereco(dados);
-    } catch (erro) {
+    if (dados.erro) {
       limparEndereco();
-      exibirErro("cep", "Não foi possível consultar o CEP.");
+      exibirErro("cep", "CEP não encontrado.");
+      return;
     }
+
+    exibirErro("cep", "");
+    preencherEndereco(dados);
+
+  } catch (erro) {
+    limparEndereco();
+    exibirErro("cep", "Não foi possível consultar o CEP.");
   }
+}
 
-  if (cepInput) {
-    // Máscara simples: 00000-000
-    cepInput.addEventListener("input", function (event) {
-      let valor = event.target.value.replace(/\D/g, "");
-      if (valor.length > 8) valor = valor.slice(0, 8);
+if (cepInput) {
+  // Máscara: 00000-000
+  cepInput.addEventListener("input", function (event) {
+    let valor = event.target.value.replace(/\D/g, "");
+    if (valor.length > 8) valor = valor.slice(0, 8);
+    if (valor.length > 5) valor = valor.slice(0, 5) + "-" + valor.slice(5);
+    event.target.value = valor;
+  });
 
-      if (valor.length > 5) {
-        valor = valor.slice(0, 5) + "-" + valor.slice(5);
-      }
+  // Executa consulta ao sair do campo (BLUR)
+  cepInput.addEventListener("blur", function (event) {
+    const valor = event.target.value.replace(/\D/g, "");
 
-      event.target.value = valor;
-    });
+    limparEndereco();
+    exibirErro("cep", "");
 
-    // Consulta ao ViaCEP quando o usuário sai do campo
-    cepInput.addEventListener("blur", function (event) {
-      const valor = event.target.value.replace(/\D/g, "");
+    if (valor.length === 8) buscarCep(valor);
+  });
+
+  // Executa consulta ao pressionar ENTER
+  cepInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault(); // evita enviar o formulário
+      const valor = cepInput.value.replace(/\D/g, "");
 
       limparEndereco();
       exibirErro("cep", "");
-
-      if (valor.length === 0) {
-        // Não digitou nada, não precisa consultar
-        return;
-      }
 
       if (valor.length !== 8) {
         exibirErro("cep", "CEP inválido. Use 8 dígitos.");
@@ -184,9 +186,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       buscarCep(valor);
-    });
-  }
-
+    }
+  });
+}
   /* =========================================
    * VALIDAÇÃO DO FORMULÁRIO
    * ======================================= */
@@ -255,11 +257,13 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // Aqui você pode integrar com API, Airtable, backend etc.
-      // Por enquanto, vamos apenas simular um envio bem-sucedido.
+      // Aqui você poderia integrar com API, Airtable, backend etc.
       form.reset();
-      limparEndereco(); // limpa cidade/estado visualmente
-      setFeedback("Agendamento enviado com sucesso! Entraremos em contato em breve.", "sucesso");
+      limparEndereco();
+      setFeedback(
+        "Agendamento enviado com sucesso! Entraremos em contato em breve.",
+        "sucesso"
+      );
     });
   }
 });

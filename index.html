@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Salão Beleza & Estilo</title>
+  <title>Barbearia Sport Hair</title>
+  <meta name="description" content="Salão de beleza moderno com agendamento online, serviços de corte, coloração, manicure e mais.">
 
-  <!-- Fonte opcional do Google (pode remover se quiser) -->
+  <!-- Fontes do Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -14,7 +15,7 @@
   />
 
   <link rel="stylesheet" href="styles.css" />
-  <script src="scripts.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <header class="header">
@@ -39,16 +40,16 @@
   </header>
 
   <main id="topo">
-    <!-- INÍCIO / HERO -->
+    <!-- HERO -->
     <section id="inicio" class="section section--hero">
       <div class="container hero__container">
         <div class="hero__content">
           <p class="hero__tagline">Seu novo visual começa aqui</p>
           <h1 class="hero__title">
-            Salão de beleza moderno, pensado para você.
+            Uma Barbearia moderna, pensada para você.
           </h1>
           <p class="hero__subtitle" data-saudar>
-            <!-- Será preenchido via JS (sem innerHTML) -->
+            <!-- preenchido via JS -->
           </p>
           <div class="hero__actions">
             <a href="#agendamento" class="btn btn--primary">
@@ -61,15 +62,12 @@
         </div>
 
         <div class="hero__highlight">
-  <div class="hero__logo-wrapper">
-    <img 
-      src="https://1drv.ms/i/c/e98c99b2210be03a/IQRmUof11bICTIbssHjRAU_CAeedCL0Pt2a64oMcDexWmb4?width=256&height=999999"
-      alt="Logo da empresa"
-      class="hero__logo"
-    />
-  </div>
-</div>
-
+          <img
+            src="https://1drv.ms/i/c/e98c99b2210be03a/IQRmUof11bICTIbssHjRAU_CAeedCL0Pt2a64oMcDexWmb4?width=256&height=999999"
+            alt="Logo da empresa Beleza &amp; Estilo"
+            class="hero__logo"
+          />
+        </div>
       </div>
     </section>
 
@@ -93,17 +91,17 @@
           </article>
 
           <article class="card-servico">
-            <h3 class="card-servico__title">Barba</h3>
+            <h3 class="card-servico__title">Coloração</h3>
             <p class="card-servico__desc">
-              Barbaterapia com toalha quente e creme hidratante.
+              Técnicas de coloração para realçar a sua personalidade.
             </p>
-            <p class="card-servico__price">R$ 35,00</p>
+            <p class="card-servico__price">R$ 50,00</p>
           </article>
 
           <article class="card-servico">
-            <h3 class="card-servico__title">Corte e Barba</h3>
+            <h3 class="card-servico__title">Barba e Cabelo</h3>
             <p class="card-servico__desc">
-              Cuidado para pele e cabelo.
+              Barbaterapia e corte alinhados ao seu visual.
             </p>
             <p class="card-servico__price">R$ 80,00</p>
           </article>
@@ -147,47 +145,44 @@
               <span class="form__error" data-error-for="telefone"></span>
             </div>
 
-             <!-- VERIFICAÇÃO DO CEP VIA API -->
-  <div class="form__field">
-    <label for="cep" class="form__label">CEP</label>
-    <input
-      type="text"
-      id="cep"
-      name="cep"
-      class="form__input"
-      inputmode="numeric"
-      maxlength="9"
-      placeholder="00000-000"
-      required
-    />
-    <span class="form__error" data-error-for="cep"></span>
-  </div>
+            <div class="form__field">
+              <label for="cep" class="form__label">CEP</label>
+              <input
+                type="text"
+                id="cep"
+                name="cep"
+                class="form__input"
+                inputmode="numeric"
+                maxlength="9"
+                placeholder="00000-000"
+                required
+              />
+              <span class="form__error" data-error-for="cep"></span>
+            </div>
 
-  <!-- Cidade (preenchido via API) -->
-  <div class="form__field">
-    <label for="cidade" class="form__label">Cidade</label>
-    <input
-      type="text"
-      id="cidade"
-      name="cidade"
-      class="form__input"
-      readonly
-    />
-    <span class="form__error" data-error-for="cidade"></span>
-  </div>
+            <div class="form__field">
+              <label for="cidade" class="form__label">Cidade</label>
+              <input
+                type="text"
+                id="cidade"
+                name="cidade"
+                class="form__input"
+                readonly
+              />
+              <span class="form__error" data-error-for="cidade"></span>
+            </div>
 
-  <!-- Estado (preenchido via API) -->
-  <div class="form__field">
-    <label for="estado" class="form__label">Estado</label>
-    <input
-      type="text"
-      id="estado"
-      name="estado"
-      class="form__input"
-      readonly
-    />
-    <span class="form__error" data-error-for="estado"></span>
-  </div>
+            <div class="form__field">
+              <label for="estado" class="form__label">Estado</label>
+              <input
+                type="text"
+                id="estado"
+                name="estado"
+                class="form__input"
+                readonly
+              />
+              <span class="form__error" data-error-for="estado"></span>
+            </div>
 
             <div class="form__field">
               <label for="servico" class="form__label">Serviço</label>
@@ -200,7 +195,7 @@
                 <option value="">Selecione um serviço</option>
                 <option value="corte">Corte de Cabelo</option>
                 <option value="coloracao">Coloração</option>
-                <option value="manicure">Manicure &amp; Pedicure</option>
+                <option value="manicure">Barba e Cabelo</option>
               </select>
               <span class="form__error" data-error-for="servico"></span>
             </div>
@@ -261,13 +256,13 @@
           </header>
 
           <ul class="contato__list">
-            <li><strong>Endereço:</strong> Rua Exemplo, 123 – Santa Amélia, BH/MG</li>
-            <li><strong>Telefone:</strong> (31) 99312-0515</li>
+            <li><strong>Endereço:</strong> Rua Exemplo, 123 – São Paulo/SP</li>
+            <li><strong>Telefone:</strong> (11) 99999-9999</li>
             <li><strong>Horário:</strong> Seg a Sáb, 9h às 19h</li>
           </ul>
 
           <a
-            href="https://wa.me/5531993120515"
+            href="https://wa.me/5511999999999"
             target="_blank"
             rel="noopener"
             class="btn btn--whatsapp"
@@ -277,11 +272,15 @@
         </div>
 
         <div class="contato__mapa">
-          <!-- Você pode trocar por um iframe de Google Maps depois -->
-          <div class="mapa-placeholder">
-            <p>Mapa do salão (Google Maps embed)</p>
-          </div>
-        </div>
+          <iframe
+           class="mapa-iframe"
+           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3753.109981833751!2d-43.9766595230101!3d-19.83529883536997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690304ef94d8b%3A0x16a0aebeaf621135!2sBarbearia%20Sport%20Hair!5e0!3m2!1spt-BR!2sbr!4v1764866616119!5m2!1spt-BR!2sbr"
+           style="border:0;"
+           allowfullscreen=""
+           loading="lazy"
+           referrerpolicy="no-referrer-when-downgrade"
+         ></iframe>  
+         </div>
       </div>
     </section>
   </main>
@@ -289,12 +288,10 @@
   <footer class="footer">
     <div class="container footer__container">
       <p class="footer__text">
-        <span id="ano-atual"></span> &copy; Barbearia Sport Hair. Todos os
-        direitos reservados.
+        <span id="ano-atual"></span> &copy; Barbearia Sport Hair. Todos os direitos reservados.
       </p>
     </div>
   </footer>
 
-  
 </body>
 </html>
